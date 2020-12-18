@@ -1,0 +1,38 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    text-align: center;
+    justify-content: center;
+    border: solid 1px black;
+}
+
+header {
+    margin: auto;
+    width: 70%;
+
+    border: solid 1px orange;
+}
+
+.cart-button {
+    display: inline;
+    color: red;
+}
+
+.goods-list {
+    display: flex;
+    justify-content: center;
+}
+
+.goods-item {
+    width: 200px;
+    height: 200px;
+    border: solid 1px violet;
+}
+
+.price-text {
+    font-weight:620;
+    text-shadow: 1px 1px 5px green;
+}
