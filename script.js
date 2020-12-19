@@ -47,7 +47,7 @@ class Basket{
   remove(){
     // тоже сначала проверка наличия, а потом удаление (через splice чтобы не было дыр)
   }
-  static info(){
+  info(){
   
   }
   render(){
