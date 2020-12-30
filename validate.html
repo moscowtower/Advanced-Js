@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Validate</title>
+</head>
+
+<style>
+    input {
+        display: block;
+    }
+    
+    .bad {
+        border: solid 1px red;
+    }
+    
+    .good {
+        border: solid 1px green;
+    }
+</style>
+
+<body>
+    <!--
+    3. *Создать форму обратной связи с полями: Имя, Телефон, E-mail, текст, кнопка Отправить. При нажатии на кнопку Отправить произвести валидацию полей следующим образом:
+    a. Имя содержит только буквы.
+    b. Телефон имеет вид +7(000)000-0000.
+    c. E-mail имеет вид mymail@mail.ru, или my.mail@mail.ru, или my-mail@mail.ru.
+    d. Текст произвольный.  
+    e. Если одно из полей не прошло валидацию, необходимо выделить это поле красной рамкой и сообщить пользователю об ошибке.
+    -->
+    <form action='#' class='form' id='form'>
+        <label for="name">Имя: (содержит только буквы)</label>
+        <input type="text" id="name" name="name"><br>
+        <label for="phone">Телефон: (имеет вид +7(000)000-0000)</label>
+        <input type="tel" id="phone" name="phone"><br>
+        <label for="phone">E-mail: (имеет вид mymail@mail.ru, или my.mail@mail.ru, или my-mail@mail.ru)</label>
+        <input type="email" id="email" name="email"><br>
+        <label for="text">Текст:</label>
+        <input type="text" id="text" name="text"><br>
+        <input type="submit" value='Отправить'>
+    </form>
+</body>
+
+<script>
+    window.onload = () => {
+        document.getElementById('form').addEventListener('submit', event => {
+            let ok = new Validate('form');
+            if (!ok.valid) {
+                event.preventDefault();
+            }
+        })
+    }
+
+    class Validate {
+        constructor(form) {
+            this.regex = {
+                name: /^[a-zа-яё]+$/,
+                phone: /^\+7\(\d{3}\)d{3}-\d{4}$/,
+                email: /^[\w._-]+@\w+\.[a-z]{2,4}$/i
+            };
+            this.form = form;
+            this.valid = false;
+            this._validateAll();
+        }
+        _validateAll() {
+            let inputs = [...document.getElementById(this.form).getElementsByTagName('input')];
+            for (let input of inputs) {
+                this._validate(input);
+            }
+            if (![...document.getElementById(this.form).querySelectorAll('bad')].length) {
+                this.valid = true;
+            }
+
+
+        }
+        _validate(input) {
+            if (this.regex[input.name]) {
+                if (!this.regex[input.name].test(input.value)) {
+                    input.classList.add('bad');
+                    this.watch(input);
+                }
+            }
+        }
+        watch(input) {
+            input.addEventListener('input', () => {
+                if (this.regex[input.name].test(input.value)) {
+                    input.classList.remove('bad');
+                    input.classList.add('good');
+                } else {
+                    input.classList.remove('good');
+                    input.classList.add('bad');
+                }
+            })
+        }
+    }
+</script>
+
+</html>

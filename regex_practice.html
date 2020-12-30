@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RegEx</title>
+</head>
+
+<body>
+    <p id='text'>
+        <!-- 
+        1. Дан большой текст, в котором для оформления прямой речи используются одинарные кавычки. Придумать шаблон, который заменяет одинарные кавычки на двойные.
+        2. Улучшить шаблон так, чтобы в конструкциях типа aren't одинарная кавычка не заменялась на двойную. 
+        -->
+        Lorem 'ipsum dolor', sit amet consectetur 'adipisicing' elit. Amet aut, perferendis laborum quae minus 'vero magni optio'. Perferendis voluptatum, omnis quae cupiditate, veritatis aperiam atque tempore aut, neque molestias molestiae natus esse alias voluptates
+        sequi quod a! Eius, officia aperiam, repudiandae voluptatem et, cupiditate 'aliquid' quidem maiores quae consequuntur repellat 'inventore sapiente' odit totam iure aliquam nulla molestias eum nihil provident officiis autem? Voluptatibus facilis
+        sequi non corrupti dolor 'dolorum vero explicabo amet et'. Neque porro non nihil quidem tenetur, 'iusto nulla delectus fuga fugit obcaecati sed magni', aspernatur est, vitae omnis earum. Quibusdam praesentium beatae illo, excepturi tempore omnis.
+        <br> Aren't 'aren't' constructions beautiful? Tell me they aren't!
+    </p>
+    <button id='fix'>fix me</button>
+    <script>
+        let text = document.getElementById('text');
+        let button = document.getElementById('fix');
+        button.addEventListener('click', () => {
+            text.textContent = text.textContent.replace(/\B'|'\B/g, '"');
+        });
+    </script>
+</body>
+
+</html>
