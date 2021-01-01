@@ -107,9 +107,8 @@ class Basket extends List {
                             product_name: element.dataset.name,
                             quantity: 1
                         };
-                        this.goods.push(product);
+                        this.goods = [product];
                         this.render();
-                        console.log(2);
                     }
                 } else {
                     alert('Error');
