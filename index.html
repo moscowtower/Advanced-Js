@@ -6,17 +6,47 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
     <script src='jquery-3.5.1.js'></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.17/dist/vue.js"></script>
     <title>eShop</title>
 </head>
 
 <body>
-    <header>
-        <button class="cart-button" type="button" id='basket'><img src='https://i.pinimg.com/originals/70/40/5f/70405f68ba3a416658543134010b9ee5.png' class='basketImage'></button>
-        <div class='basket-popup invisible'></div>
-    </header>
-    <main>
-        <div class="products"></div>
-    </main>
+    <div id='app'>
+        <header>
+            <input type="text" class="goods-search" v-model='searchLine' />
+            <button class="search-button" type="button" @click='filterProducts'>Искать</button>
+            <button class="cart-button" type="button" id='basket' v-on:click='showBasket'><img src='https://i.pinimg.com/originals/70/40/5f/70405f68ba3a416658543134010b9ee5.png' class='basketImage'></button>
+            <div class='basket-popup invisible'>
+                <ul>
+                    <h3>Корзина</h3>
+                    <hr>
+                    <li v-if='!basket.length'>Корзина пуста</li>
+                    <div v-for='product in basket' :key='product.id_product' :data-id='product.id_product'>
+                        <div class='product-bio'>
+                            <img src='https://placehold.it/25x25'>
+                            <li>{{product.product_name}}, ₽{{product.price}}, {{product.quantity}}</li>
+                            <div class="right-block">
+                                <button class="del-btn" data-id=`{this.id_product}` @click='removeProduct(product)'>&times;</button>
+                            </div>
+                            <hr>
+                        </div>
+                </ul>
+                </div>
+        </header>
+        <main>
+            <div class="products">
+                <div class="product-item" v-for="product of products" :key="product.id_product" :data-id="product.id_product">
+                    <img src="https://placehold.it/150x150" alt="Some img">
+                    <div class="desc">
+                        <h3>{{product.product_name}}</h3>
+                        <p>{{product.price}} $</p>
+                        <button class="buy-btn" @click="addProduct(product)">Купить</button>
+                    </div>
+                </div>
+            </div>
+        </main>
+        </div>
+
 </body>
 <script src="script.js"></script>
 
