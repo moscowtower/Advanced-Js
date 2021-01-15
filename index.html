@@ -13,27 +13,12 @@
 <body>
     <div id='app'>
         <header>
-            <input type="text" class="goods-search" v-model='searchLine' />
-            <button class="search-button" type="button" @click='filterProducts'>Искать</button>
+            <search v-on:product-search='filterProducts'>Поиск</search>
             <button class="cart-button" type="button" id='basket' v-on:click='showBasket'><img src='https://i.pinimg.com/originals/70/40/5f/70405f68ba3a416658543134010b9ee5.png' class='basketImage'></button>
-            <div class='basket-popup invisible'>
-                <ul>
-                    <h3>Корзина</h3>
-                    <hr>
-                    <li v-if='!basket.length'>Корзина пуста</li>
-                    <div v-for='product in basket' :key='product.id_product' :data-id='product.id_product'>
-                        <div class='product-bio'>
-                            <img src='https://placehold.it/25x25'>
-                            <li>{{product.product_name}}, ₽{{product.price}}, {{product.quantity}}</li>
-                            <div class="right-block">
-                                <button class="del-btn" data-id=`{this.id_product}` @click='removeProduct(product)'>&times;</button>
-                            </div>
-                            <hr>
-                        </div>
-                </ul>
-                </div>
+            <basket :basket='basket' class='basket-popup invisible' v-on:remove-product='removeProduct'></basket>
         </header>
         <main>
+            <problem v-if='problem'></problem>
             <div class="products">
                 <div class="product-item" v-for="product of products" :key="product.id_product" :data-id="product.id_product">
                     <img src="https://placehold.it/150x150" alt="Some img">
@@ -45,9 +30,12 @@
                 </div>
             </div>
         </main>
-        </div>
+    </div>
 
 </body>
+<script src='problem-comp.js'></script>
+<script src='search-comp.js'></script>
+<script src='basket-comp.js'></script>
 <script src="script.js"></script>
 
 </html>

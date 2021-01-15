@@ -9,12 +9,16 @@ const app = new Vue({
         filteredProducts: [],
         basket: [],
         itemIMG: 'https://placehold.it/50x100',
-        searchLine: '',
+        problem: false,
     },
     methods: {
         getJson(url) {
             return fetch(`${url}`)
                 .then(result => result.json())
+                .catch(error => {
+                    console.log(error)
+                    this.problem = true;
+                })
         },
         addProduct(product) {
             this.getJson(`${API}/addToBasket.json`)
@@ -54,8 +58,8 @@ const app = new Vue({
                     }
                 })
         },
-        filterProducts() {
-            const regexp = new RegExp(this.searchLine, 'i');
+        filterProducts(searchLine) {
+            const regexp = new RegExp(searchLine, 'i');
             this.filteredProducts = this.products.filter(product => regexp.test(product.product_name));
             this.products.forEach(product => {
                 const item = document.querySelector(`.product-item[data-id='${product.id_product}']`);
