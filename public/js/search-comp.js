@@ -1,4 +1,4 @@
-Vue.component('search', {
+const search = {
     data() {
         return {
             searchLine: ''
@@ -10,4 +10,6 @@ Vue.component('search', {
         <button class="search-button" type='submit'><slot></slot></button>
     </form>
     `
-});
+};
+
+export default search;

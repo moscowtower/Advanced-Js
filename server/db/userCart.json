@@ -2,6 +2,26 @@
     "amount": 0,
     "countGoods": 0,
     "contents": [
-
+        {
+            "quantity": 0,
+            "id_product": 124,
+            "product_name": "Ведро",
+            "price": 1600,
+            "img": "vedro.webp"
+        },
+        {
+            "quantity": 1,
+            "id_product": 457,
+            "product_name": "Лейка",
+            "price": 3000,
+            "img": "leika.jpg"
+        },
+        {
+            "quantity": 0,
+            "id_product": 123,
+            "product_name": "Телогрейка",
+            "price": 45600,
+            "img": "telogreika.jpg"
+        }
     ]
 }

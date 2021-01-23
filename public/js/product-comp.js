@@ -1,15 +1,4 @@
-Vue.component('products', {
-    props: ['products'],
-    template: `
-    <div>
-        <product class="product-item" v-for="product of products" :key="product.id_product"
-        :data-id="product.id_product" :product="product"></product>
-    </div>
-    `
-});
-
-
-Vue.component('product', {
+const productitem = {
     props: ['product'],
     template: `
     <div class="product-item">
@@ -21,4 +10,18 @@ Vue.component('product', {
                     </div>
                 </div>
     `
-});
+};
+
+const products = {
+    props: ['products'],
+    components: { 'product-item': productitem },
+    template: `
+    <div>
+        <product-item class="product-item" v-for="product of products" :key="product.id_product"
+        :data-id="product.id_product" :product="product"></product-item>
+    </div>
+    `
+};
+
+
+export default products;

@@ -1,6 +1,11 @@
 let add = (cart, req) => {
-    cart.contents.push(req.body);
-    return JSON.stringify(cart, null, 4);
+    let find = cart.contents.find(el => el.id_product === +req.params.id);
+    if (!find) {
+        cart.contents.push(req.body);
+        return JSON.stringify(cart, null, 4);
+    } else {
+        change(car, req);
+    }
 };
 let change = (cart, req) => {
     let find = cart.contents.find(el => el.id_product === +req.params.id);
@@ -10,5 +15,5 @@ let change = (cart, req) => {
 
 module.exports = {
     add,
-    change
+    change,
 };
